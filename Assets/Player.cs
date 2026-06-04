@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
     public PlayerInputSet input { get; private set;}   
@@ -14,20 +13,27 @@ public class Player : MonoBehaviour
     public Player_MoveState moveState { get; private set; }
     public Player_JumpState jumpState { get; private set; }
     public Player_FallState fallState { get; private set; }
+    public Player_WallSlideState wallSlideState { get; private set; }
 
-        
+
     [Header("Movement Details")]
     public float moveSpeed;
     public float jumpForce = 5f;
+
     [Range(0,1)]
     public float inAirMoveMultiplier = .7f; // should be 0 to 1
+    [Range(0, 1)]
+    public float wallSlideSlowMultiplier = .7f; // should be 0 to 1
     private bool facingRight = true;
+    private int facingDir = 1; // 1 = right, -1 = left
     public Vector2 moveInput { get; private set; }
 
     [Header("Collision detection")]
     [SerializeField] private float groundCheckDistance;
+    [SerializeField] private float wallCheckDistance;
     [SerializeField] private LayerMask whatIsGround;
-    public bool groundDetected;
+    public bool groundDetected { get; private set; }
+    public bool wallDetected { get; private set; }
 
     private void Awake()
     {
@@ -41,6 +47,8 @@ public class Player : MonoBehaviour
         moveState = new Player_MoveState(this,stateMachine, "move");
         jumpState = new Player_JumpState(this,stateMachine, "jumpFall");
         fallState = new Player_FallState(this,stateMachine, "jumpFall");
+        wallSlideState = new Player_WallSlideState(this,stateMachine, "wallSlide");
+
     }
 
     private void OnEnable()
@@ -84,18 +92,21 @@ public class Player : MonoBehaviour
             Flip();
         }
     }
-    private void Flip()
+    public void Flip()
     {
         transform.Rotate(0f, 180f, 0f);
         facingRight = !facingRight;
+        facingDir *= -1;
     }
 
     private void HandleCollisionDetection()
     {
         groundDetected = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
+        wallDetected = Physics2D.Raycast(transform.position,Vector2.right * facingDir, wallCheckDistance, whatIsGround);
     }
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position,transform.position + new Vector3(0,-groundCheckDistance));
+        Gizmos.DrawLine(transform.position, transform.position + new Vector3(wallCheckDistance * facingDir, 0));
     }
 }
