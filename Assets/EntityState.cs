@@ -8,8 +8,9 @@ public abstract class EntityState
 
     protected Animator anim;
     protected Rigidbody2D rb;
+    protected PlayerInputSet input;
 
-    public EntityState(Player player,StateMachine stateMachine, string animBoolName)
+    public EntityState(Player player,StateMachine stateMachine, string animBoolName) 
     {
         this.player = player;
         this.stateMachine = stateMachine;
@@ -17,6 +18,7 @@ public abstract class EntityState
 
         anim = player.anim;
         rb = player.rb;
+        input = player.input;
     }
 
 
@@ -26,7 +28,7 @@ public abstract class EntityState
     }
     public virtual void Update() // run logic of the state, this method will be called every frame
     {
-        Debug.Log("Updating state: " + animBoolName);
+        anim.SetFloat("yVelocity", rb.linearVelocity.y);
     }
     public virtual void Exit() // this method will be called, everytime we are leaving the state and change a new one
     {
