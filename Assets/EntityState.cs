@@ -11,6 +11,7 @@ public abstract class EntityState
     protected PlayerInputSet input; // để có thể truy cập được input của player, vì tất cả các state đều sẽ kế thừa từ class này nên sẽ có thể truy cập được input
 
     protected float stateTimer;
+    protected bool triggerCalled;
     public EntityState(Player player,StateMachine stateMachine, string animBoolName) // constructor, để khởi tạo các thuộc tính của class, khi tạo một state mới sẽ phải truyền vào player, state machine và tên trạng thái
     {
         this.player = player;
@@ -26,6 +27,7 @@ public abstract class EntityState
     public virtual void Enter() // everytime state will be changed, this method will be called
     {
         anim.SetBool(animBoolName, true);
+        triggerCalled = false; 
     }
     public virtual void Update() // run logic of the state, this method will be called every frame
     {
@@ -41,6 +43,11 @@ public abstract class EntityState
     {
         anim.SetBool(animBoolName, false);
     }
+
+    public void CallAnimationTrigger()
+    {
+        triggerCalled = true;
+    }
     private bool CanDash()
     {
         if (player.wallDetected)
@@ -51,5 +58,6 @@ public abstract class EntityState
 
         return true;
     }
+
 
 }

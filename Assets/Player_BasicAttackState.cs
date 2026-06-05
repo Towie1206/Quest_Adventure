@@ -1,16 +1,17 @@
 using UnityEngine;
 
-public class Player_BasicAttackState : MonoBehaviour
+public class Player_BasicAttackState : EntityState
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public Player_BasicAttackState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
-        
     }
-
-    // Update is called once per frame
-    void Update()
+    public override void Enter()
     {
-        
+        base.Enter();
+    }
+    public override void Update()
+    {
+        base.Update();
+        if(triggerCalled) stateMachine.ChangeState(player.idleState);   
     }
 }
