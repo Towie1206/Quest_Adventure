@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -20,8 +21,10 @@ public class Player : MonoBehaviour
 
 
     [Header("Attack Detail")]
-    public Vector2 attackVelocity;
+    public Vector2[] attackVelocity;
     public float attackVelocityDuration = .1f;
+    public float comboResetTime = 1;
+    private Coroutine queueAttackCo;
 
     [Header("Movement Details")]
     public float moveSpeed;
@@ -91,6 +94,21 @@ public class Player : MonoBehaviour
         HandleCollisionDetection();
         stateMachine.UpdateActiveState();
     }
+
+    public void EnterAttackStateWithDelay()
+    {
+        if (queueAttackCo != null)
+            StopCoroutine(queueAttackCo);
+
+        queueAttackCo = StartCoroutine(EnterAttackStateWithDelayCo());
+    }
+
+    private IEnumerator EnterAttackStateWithDelayCo()
+    {
+        yield return new WaitForEndOfFrame();
+        stateMachine.ChangeState(basicAttackState);
+    }
+
     public void CallAnimationTrigger()
     {
         stateMachine.currentState.CallAnimationTrigger();
