@@ -10,7 +10,7 @@ public class Player_BasicAttackState : EntityState
     private int attackDir;
     private int comboIndex = 1;
     private int comboLimit = 3;
-    private const int FirstComboIndex = 1; // start combo index in number 1,this parametr is    use in the animator   
+    private const int FirstComboIndex = 1; // start combo index in number 1,this parametr is use in the animator   
 
     public Player_BasicAttackState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
@@ -19,7 +19,6 @@ public class Player_BasicAttackState : EntityState
             Debug.LogWarning("Adjusted combo limit to match attack velocity array!");
             comboLimit = player.attackVelocity.Length;
         }
-            
     }
 
     public override void Enter()
