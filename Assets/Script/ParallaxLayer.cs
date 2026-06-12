@@ -25,11 +25,11 @@ public class ParallaxLayer
         float imageRightEdge = (background.position.x + imageHalfWidth) - imageWidthOffset;
         float imageLeftEdge = (background.position.x - imageHalfWidth) + imageWidthOffset;
 
-        if (imageRightEdge < cameraLeftEdge)
+        if (imageRightEdge < cameraLeftEdge) // mép phải của background đã nằm bên trái camera
         {
             background.position += Vector3.right * (imageFullWidth);
         }
-        else if (imageRightEdge > cameraRightEdge)
+        else if (imageLeftEdge > cameraRightEdge)// mép trái của background đã nằm bên phải camera
         {
             background.position += Vector3.right * (-imageFullWidth);
         }

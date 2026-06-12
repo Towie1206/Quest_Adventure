@@ -11,7 +11,7 @@ public class ParallaxBackground : MonoBehaviour
     private void Awake()
     {
         mainCamera = Camera.main;
-        cameraHalfWidth = mainCamera.orthographicSize * mainCamera.aspect; //
+        cameraHalfWidth = mainCamera.orthographicSize * mainCamera.aspect; //orthographicSize = 8 setup in camera aspect : 16/9
         CalculateImageLength();
     }
 
