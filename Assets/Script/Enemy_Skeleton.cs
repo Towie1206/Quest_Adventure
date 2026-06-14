@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class Enemy_Skeleton : Enemy
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void Awake()
     {
-        
+        base.Awake();
+
+        idleState = new Enemy_IdleState(this, stateMachine, "idle");
+        moveState = new Enemy_MoveState(this, stateMachine, "move");
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void Start()
     {
-        
+        base.Start();
+        stateMachine.Initialize(idleState);
     }
 }
