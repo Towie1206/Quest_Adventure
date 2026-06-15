@@ -9,7 +9,7 @@ public class Enemy_GroundedState : EnemyState
     public override void Update()
     {
         base.Update();
-        if(enemy.PlayerDetection()) // nếu ko phải trả về default
+        if(enemy.PlayerDetected()) // nếu ko phải trả về default
         {
             stateMachine.ChangeState(enemy.battleState);
         }

@@ -9,7 +9,7 @@ public class Entity_AnimationTriggers : MonoBehaviour
     }
     private void CurrentStateTrigger() // get accec to player and let current player's state know that we want to exit state 
     {
-        entity.CallAnimationTrigger();
+        entity.CurrentStateAnimationTrigger();
     }
 
 }

@@ -24,14 +24,19 @@ public abstract class EntityState
     public virtual void Update() // run logic of the state, this method will be called every frame
     {
         stateTimer -= Time.deltaTime;
+        UpdateAnimationParameters();
     }
     public virtual void Exit() // this method will be called, everytime we are leaving the state and change a new one
     {
         anim.SetBool(animBoolName, false);
     }
 
-    public void CallAnimationTrigger()
+    public void AnimationTrigger()
     {
         triggerCalled = true;
+    }
+    public virtual void UpdateAnimationParameters()
+    {
+
     }
 }
