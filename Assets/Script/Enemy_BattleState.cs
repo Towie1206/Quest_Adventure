@@ -2,7 +2,7 @@
 
 public class Enemy_BattleState : EnemyState
 {
-    private Transform player; // lấy vị trí player từ raycast
+    private Transform player; 
     private float lastTimeWasInBattle;
     public Enemy_BattleState(Enemy enemy, StateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
     {
@@ -12,8 +12,10 @@ public class Enemy_BattleState : EnemyState
     {
         base.Enter();
 
-        if (player == null)
-            player = enemy.PlayerDetected().transform;
+        UpdateBattleTimer();
+
+        if (player == null) //same player ??= enemy.GetPlayerReference();
+            player = enemy.GetPlayerReference(); // lấy transform player từ raycast
         if (ShouldRetreat())
         {
             rb.linearVelocity = new Vector2(enemy.retreatVelocity.x * -DirectionToPlayer(), enemy.retreatVelocity.y);

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Enemy : Entity 
 {
@@ -24,9 +24,25 @@ public class Enemy : Entity
     [SerializeField] private LayerMask whatIsPlayer;
     [SerializeField] private Transform playerCheck;
     [SerializeField] private float playerCheckDistance = 10;
+    public Transform player { get; private set; }
 
 
-    public RaycastHit2D PlayerDetected()
+    public void TryEnterBattleState(Transform player)
+    {
+        if (stateMachine.currentState == battleState || stateMachine.currentState == attackState)
+            return;
+
+        this.player = player; // lấy transform player từ damageDealer
+        stateMachine.ChangeState(battleState); 
+    }    
+    public Transform GetPlayerReference()
+    {
+        if (player == null)
+            player = PlayerDetected().transform;
+
+        return player;
+    }    
+    public RaycastHit2D PlayerDetected() // trả về collider,Tọa độ (x, y), distance, transform
     {
         RaycastHit2D hit = 
             Physics2D.Raycast(playerCheck.position,Vector2.right * facingDir,playerCheckDistance,whatIsPlayer | whatIsGround);
@@ -41,11 +57,11 @@ public class Enemy : Entity
     {
         base.OnDrawGizmos();
 
-        Gizmos.color = Color.yellow;
+        Gizmos.color = Color.yellow; //detected
         Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + (facingDir * playerCheckDistance), playerCheck.position.y));
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.red; // attackDistance
         Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + (facingDir * attackDistance), playerCheck.position.y));
-        Gizmos.color = Color.green;
+        Gizmos.color = Color.green;// Retreat
         Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + (facingDir * minRetreatDistance), playerCheck.position.y));
 
     }
