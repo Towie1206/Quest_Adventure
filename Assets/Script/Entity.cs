@@ -1,3 +1,4 @@
+﻿using System.Collections;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
@@ -19,6 +20,10 @@ public class Entity : MonoBehaviour
     [SerializeField] private Transform secondaryWallCheck;
     public bool groundDetected { get; private set; }
     public bool wallDetected { get; private set; }
+
+    //Condition variables biến điều kiện
+    private bool isKnocked;
+    private Coroutine knockbackCo;
 
     protected virtual void Awake()
     {
@@ -42,9 +47,32 @@ public class Entity : MonoBehaviour
     {
         stateMachine.currentState.AnimationTrigger();
     }
+    public void ReciveKnockback(Vector2 knockback, float knockbackDuration)
+    {
+        if (knockbackCo != null)
+          StopCoroutine(knockbackCo);
+
+        knockbackCo = StartCoroutine(KnockbackCo(knockback, knockbackDuration));
+    }
+
+    private IEnumerator KnockbackCo(Vector2 knockback, float knockbackDuration)
+    {
+        isKnocked = true;
+        rb.linearVelocity = knockback;
+
+        yield return new WaitForSeconds(knockbackDuration);
+
+        rb.linearVelocity = Vector2.zero; //it's going to just slide all over the level if dont reset
+
+        isKnocked = false;
+    }
 
     public void SetVelocity(float xVelocity, float yVelocity)
     {
+        if (isKnocked)
+            return; 
+
+
         rb.linearVelocity = new Vector2(xVelocity, yVelocity);
         HandleFlip(xVelocity);
     }
