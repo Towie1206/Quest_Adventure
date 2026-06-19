@@ -1,16 +1,24 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Entity_Health : MonoBehaviour
 {
+    private Entity_VFX entityVfx;
     [SerializeField] protected float maxHp = 100;
     [SerializeField] protected bool isDead;
 
-    public virtual void TakeDame(float damage, Transform damageDealer) // nhận damage và nhận đc transform của người đánh 
+    protected virtual void Awake()
+    {
+        entityVfx = GetComponent<Entity_VFX>();
+    }    
+
+
+    //every time somebody takes damage the entity will know who dealt that damage.
+    public virtual void TakeDame(float damage, Transform damageDealer) 
     {
         if(isDead)
             return;
 
+        entityVfx?.PlayOnDamageVfx(); // mean :entityVfx != null entityVfx.PlayOnDamageVfx();
         ReduceHp(damage);
 
     }

@@ -27,12 +27,12 @@ public class Enemy : Entity
     public Transform player { get; private set; }
 
 
-    public void TryEnterBattleState(Transform player)
+    public void TryEnterBattleState(Transform player) // player là vị trí của damedealer
     {
         if (stateMachine.currentState == battleState || stateMachine.currentState == attackState)
             return;
 
-        this.player = player; // lấy transform player từ damageDealer
+        this.player = player; //gắn vào để mang đi làm tham chiếu chỗ khác
         stateMachine.ChangeState(battleState); 
     }    
     public Transform GetPlayerReference()

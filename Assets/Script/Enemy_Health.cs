@@ -7,11 +7,13 @@ public class Enemy_Health : Entity_Health
 
     public override void TakeDame(float damage,Transform damageDealer)
     {
-        //try enter battle state 
-        // if damedealer == player;
+        //!try enter battle state 
+        //?if damedealer == player;
         // enemy.player == damageDealer;
+       
         if (damageDealer.GetComponent<Player>() != null) // mean : người thực hiện đòn đánh có component Player
             enemy.TryEnterBattleState(damageDealer);
-        base.TakeDame(damage,transform);
+
+       base.TakeDame(damage,transform);
     }
 }
