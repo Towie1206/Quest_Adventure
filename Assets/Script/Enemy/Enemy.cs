@@ -6,6 +6,7 @@ public class Enemy : Entity
     public Enemy_MoveState moveState;
     public Enemy_AttackState attackState;
     public Enemy_BattleState battleState;
+    public Enemy_DeadState deadState;
 
     [Header("Movement details")]
     public float idleTime = 2;
@@ -26,6 +27,17 @@ public class Enemy : Entity
     [SerializeField] private float playerCheckDistance = 10;
     public Transform player { get; private set; }
 
+    public override void EntityDead()
+    {
+        base.EntityDead();
+
+        stateMachine.ChangeState(deadState);
+    }
+
+    private void HandlePlayerDeath()
+    {
+        stateMachine.ChangeState(idleState);
+    }
 
     public void TryEnterBattleState(Transform player) // player là vị trí của damedealer
     {
@@ -64,5 +76,14 @@ public class Enemy : Entity
         Gizmos.color = Color.green;// Retreat
         Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + (facingDir * minRetreatDistance), playerCheck.position.y));
 
+    }
+
+    private void OnEnable()
+    {
+        Player.OnPlayerDead += HandlePlayerDeath;
+    }
+    private void OnDisable()
+    {
+        Player.OnPlayerDead -= HandlePlayerDeath;
     }
 }

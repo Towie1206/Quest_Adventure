@@ -51,6 +51,7 @@ public class Entity_Health : MonoBehaviour
     private void Die()
     {
         isDead = true;
+        entity.EntityDead();
     }
     private Vector2 CalulateKnockback(float damage, Transform damageDealer)
     {

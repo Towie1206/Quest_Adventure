@@ -10,10 +10,14 @@ public class Enemy_Health : Entity_Health
         //!try enter battle state 
         //?if damedealer == player;
         // enemy.player == damageDealer;
-       
+        base.TakeDame(damage, transform);
+
+        if (isDead)
+            return;
+
         if (damageDealer.GetComponent<Player>() != null) // mean : người thực hiện đòn đánh có component Player
             enemy.TryEnterBattleState(damageDealer);
 
-       base.TakeDame(damage,transform);
+       
     }
 }
