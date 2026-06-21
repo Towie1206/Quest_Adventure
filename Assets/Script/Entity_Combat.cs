@@ -15,10 +15,10 @@ public class Entity_Combat : MonoBehaviour
 
         foreach (var target in GetDetectedColliders())
         {
-            Entity_Health targetHealth = target.GetComponent<Entity_Health>();
-
-            targetHealth?.TakeDame(damage,transform); // if(targetHealth != null) targetHealth.TakeDamage(damage);
+            IDamgable damgable = target.GetComponent<IDamgable>();
+            damgable?.TakeDamage(damage, transform); // if(damgable != null) damgable.TakeDamage(damage);
             // transform của người thực hiện đòn đánh 
+
         }
     }
 

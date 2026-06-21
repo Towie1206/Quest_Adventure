@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Entity_Health : MonoBehaviour
+public class Entity_Health : MonoBehaviour, IDamgable   
 {
     private Entity_VFX entityVfx;
     private Entity entity;
@@ -29,7 +29,7 @@ public class Entity_Health : MonoBehaviour
 
 
     //every time somebody takes damage the entity will know who dealt that damage.
-    public virtual void TakeDame(float damage, Transform damageDealer) 
+    public virtual void TakeDamage(float damage, Transform damageDealer) 
     {
         if(isDead)
             return;

@@ -64,7 +64,7 @@ public class Enemy : Entity
 
         return hit;
     }
-
+        
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
