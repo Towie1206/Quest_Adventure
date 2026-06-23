@@ -8859,8 +8859,8 @@ GameObject:
   - component: {fileID: 1804193757}
   - component: {fileID: 1804193760}
   - component: {fileID: 1804193759}
+  - component: {fileID: 1804193764}
   - component: {fileID: 1804193762}
-  - component: {fileID: 1804193761}
   - component: {fileID: 1804193763}
   m_Layer: 7
   m_Name: Player
@@ -8986,24 +8986,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &1804193761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1804193756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82c91c5b2b2192940bfa6b8c29baf7cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Entity_Combat
-  damage: 10
-  targetCheck: {fileID: 1773555205}
-  targetCheckRadius: 1
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!114 &1804193762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9038,6 +9020,25 @@ MonoBehaviour:
   knockbackDuration: 0.2
   heavyKnockbackDuration: 0.5
   heavyDamageThreshold: 0.3
+--- !u!114 &1804193764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804193756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce81073f4dde8d84db168f78acc851df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player_Combat
+  damage: 10
+  targetCheck: {fileID: 1773555205}
+  targetCheckRadius: 1
+  whatIsTarget:
+    serializedVersion: 2
+    m_Bits: 256
+  counterRecovery: 0.25
 --- !u!1 &1853135627
 GameObject:
   m_ObjectHideFlags: 0
