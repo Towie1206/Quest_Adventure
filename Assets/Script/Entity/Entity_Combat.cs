@@ -2,6 +2,7 @@
 
 public class Entity_Combat : MonoBehaviour
 {
+    private Entity_VFX vfx;
 
     public float damage = 10;
 
@@ -10,15 +11,23 @@ public class Entity_Combat : MonoBehaviour
     [SerializeField] private float targetCheckRadius = 1;
     [SerializeField] private LayerMask whatIsTarget;
 
+    private void Awake()
+    {
+        vfx = GetComponent<Entity_VFX>();
+    }
+
     public void PerformAttack() // thực hiện 1 đòn đánh 
     {
 
         foreach (var target in GetDetectedColliders())
         {
             IDamgable damgable = target.GetComponent<IDamgable>();
-            damgable?.TakeDamage(damage, transform); // if(damgable != null) damgable.TakeDamage(damage);
-            // transform của người thực hiện đòn đánh 
 
+            if (damgable == null)
+                continue;
+
+            damgable.TakeDamage(damage, transform); // transform của người thực hiện đòn đánh 
+            vfx.CreateOnHitVFX(target.transform);
         }
     }
 
