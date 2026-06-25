@@ -1,8 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    public event Action OnFlipped; //các class khác có thể đăng ký để lắng nghe sự kiện này.
+
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
     protected StateMachine stateMachine;
@@ -98,6 +101,9 @@ public class Entity : MonoBehaviour
         transform.Rotate(0f, 180f, 0f);
         facingRight = !facingRight;
         facingDir *= -1;
+
+         // Gọi event OnFlipped nếu có object nào đang subscribe.
+        OnFlipped?.Invoke(); // if(OnFlipped != null) OnFlipped.Invoke();
     }
 
     private void HandleCollisionDetection()

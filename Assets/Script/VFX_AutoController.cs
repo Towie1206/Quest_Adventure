@@ -6,6 +6,7 @@ public class VFX_AutoController : MonoBehaviour
     [SerializeField] private float destroyDelay = 1;
     [Space]
     [SerializeField] private bool randomOffset = true;
+    [SerializeField] private bool randomRotation = true;
 
     [Header("Random Position")]
     [SerializeField] private float xMinOffset = -.3f;
@@ -17,6 +18,9 @@ public class VFX_AutoController : MonoBehaviour
 
     private void Start()
     {
+        ApplyRamdomOffset();
+        ApplyRamdomRotation();
+
         if(autoDestroy)
             Destroy(gameObject, destroyDelay);
     }
@@ -27,5 +31,16 @@ public class VFX_AutoController : MonoBehaviour
 
         float xOffset = Random.Range(xMinOffset, xMaxOffset);
         float yOffset = Random.Range(yMinOffset, yMaxOffset);
+
+        transform.position = transform.position + new Vector3(xOffset, yOffset, 0);
+    }
+    private void ApplyRamdomRotation()
+    {
+        if (!randomRotation)
+            return;
+
+        float zRotation = Random.Range(0, 360);
+
+        transform.position = transform.position + new Vector3(0, 0, zRotation);
     }
 }

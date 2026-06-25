@@ -141,7 +141,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.9764, y: -0.43853, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.7500001, y: 1.7500001, z: 1.7500001}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8251097840747169673}
@@ -161,3 +161,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VFX_AutoController
   autoDestroy: 1
   destroyDelay: 1
+  randomOffset: 1
+  randomRotation: 1
+  xMinOffset: -0.3
+  xMaxOffset: 0.3
+  yMinOffset: -0.3
+  yMaxOffset: 0.3
