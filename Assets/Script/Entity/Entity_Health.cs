@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Entity_Health : MonoBehaviour, IDamgable   
+public class Entity_Health : MonoBehaviour, IDamgable
 {
     private Slider healthBar;
     private Entity_VFX entityVfx;
@@ -30,22 +30,29 @@ public class Entity_Health : MonoBehaviour, IDamgable
 
         currentHp = stats.GetMaxHealth();
         UpdateHealthBar();
-    }    
+    }
 
 
     //every time somebody takes damage the entity will know who dealt that damage.
-    public virtual bool TakeDamage(float damage, Transform damageDealer) 
+    public virtual bool TakeDamage(float damage, Transform damageDealer)
     {
-        if(isDead)
+        if (isDead)
             return false;
         if (AttackEvaded())
             return false;
 
-        entity.ReciveKnockback(CalulateKnockback(damage, damageDealer), CaculateDuration(damage));
+        Entity_Stats attackerStats = damageDealer.GetComponent<Entity_Stats>();
+        float armorReduction = attackerStats != null ? attackerStats.GetArmorReduction() : 0;
+
+        float mitigation = stats.GetArmorMitigation(armorReduction);
+        float finalDamage = damage * (1 - mitigation); // 150 damage // .6f = 60% // take 40% damage
+
+        entity.ReciveKnockback(CalulateKnockback(finalDamage, damageDealer), CaculateDuration(finalDamage));
 
         entityVfx?.PlayOnDamageVfx(); // mean :entityVfx != null entityVfx.PlayOnDamageVfx();
-        ReduceHp(damage);
-        UpdateHealthBar();
+        ReduceHp(finalDamage);
+
+        Debug.Log("Damage Taken" + finalDamage);
 
         return true;
     }
@@ -67,7 +74,7 @@ public class Entity_Health : MonoBehaviour, IDamgable
     }
     private void UpdateHealthBar()
     {
-        if(healthBar == null)
+        if (healthBar == null)
             return;
 
         healthBar.value = currentHp / stats.GetMaxHealth();

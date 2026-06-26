@@ -10251,7 +10251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entity_Stats
   maxHealth:
-    baseValue: 100
+    baseValue: 10000
   major:
     strength:
       baseValue: 0
@@ -10265,9 +10265,11 @@ MonoBehaviour:
     damage:
       baseValue: 10
     critPower:
-      baseValue: 250
+      baseValue: 0
     critChance:
-      baseValue: 100
+      baseValue: 0
+    armorReduction:
+      baseValue: 0
     fireDamage:
       baseValue: 0
     iceDamage:
@@ -10917,7 +10919,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entity_Stats
   maxHealth:
-    baseValue: 100
+    baseValue: 10000
   major:
     strength:
       baseValue: 0
@@ -10933,6 +10935,8 @@ MonoBehaviour:
     critPower:
       baseValue: 0
     critChance:
+      baseValue: 0
+    armorReduction:
       baseValue: 0
     fireDamage:
       baseValue: 0

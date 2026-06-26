@@ -7,6 +7,7 @@ public class Stat_OffenseGroup
     public Stat damage;
     public Stat critPower;
     public Stat critChance;
+    public Stat armorReduction; // armor penetration: xuyen giap 
 
     // Elemental damage
     public Stat fireDamage;
