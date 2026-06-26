@@ -3,8 +3,8 @@
 public class Entity_Combat : MonoBehaviour
 {
     private Entity_VFX vfx;
+    private Entity_Stats stats;
 
-    public float damage = 10;
 
     [Header("Target detection")]
     [SerializeField] private Transform targetCheck;
@@ -14,6 +14,7 @@ public class Entity_Combat : MonoBehaviour
     private void Awake()
     {
         vfx = GetComponent<Entity_VFX>();
+        stats = GetComponent<Entity_Stats>();
     }
 
     public void PerformAttack() // thực hiện 1 đòn đánh 
@@ -24,13 +25,14 @@ public class Entity_Combat : MonoBehaviour
             IDamgable damgable = target.GetComponent<IDamgable>();
 
             if (damgable == null)
-                continue;
+                continue; // skip target, go to next target
 
+            float damage = stats.GetPhysicalDamage(out bool isCrit);
             // Có 2 chức năng vừa trả về bool vừa thực thi takedamage()
             bool targetGotHit = damgable.TakeDamage(damage, transform); // transform của người thực hiện đòn đánh 
 
             if (targetGotHit)
-                vfx.CreateOnHitVFX(target.transform);
+                vfx.CreateOnHitVFX(target.transform, isCrit);
         }
     }
 
