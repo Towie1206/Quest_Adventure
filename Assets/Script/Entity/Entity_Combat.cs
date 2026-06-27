@@ -30,7 +30,7 @@ public class Entity_Combat : MonoBehaviour
             float elementalDamage = stats.GetElementalDamage(out ElementType element);
             float damage = stats.GetPhysicalDamage(out bool isCrit);
             // Có 2 chức năng vừa trả về bool vừa thực thi takedamage()
-            bool targetGotHit = damegable.TakeDamage(damage, elementalDamage, transform); // transform của người thực hiện đòn đánh 
+            bool targetGotHit = damegable.TakeDamage(damage, elementalDamage,element, transform); // transform của người thực hiện đòn đánh 
 
             if (targetGotHit)
                 vfx.CreateOnHitVFX(target.transform, isCrit);

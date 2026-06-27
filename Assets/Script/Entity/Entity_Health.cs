@@ -34,7 +34,7 @@ public class Entity_Health : MonoBehaviour, IDamgable
 
 
     //every time somebody takes damage the entity will know who dealt that damage.
-    public virtual bool TakeDamage(float damage, float elementalDamage, Transform damageDealer)
+    public virtual bool TakeDamage(float damage, float elementalDamage, ElementType element, Transform damageDealer)
     {
         if (isDead)
             return false;
@@ -45,21 +45,29 @@ public class Entity_Health : MonoBehaviour, IDamgable
         float armorReduction = attackerStats != null ? attackerStats.GetArmorReduction() : 0;
 
         float mitigation = stats.GetArmorMitigation(armorReduction);
-        float finalDamage = damage * (1 - mitigation); // 150 damage // .6f = 60% // take 40% damage
+        float physicalDamageTaken = damage * (1 - mitigation); // 150 damage // .6f = 60% // take 40% damage
 
-        entity.ReciveKnockback(CalulateKnockback(finalDamage, damageDealer), CaculateDuration(finalDamage));
+        float resistance = stats.GetElementalResistance(element);
+        float elementalDamageTaken = elementalDamage * (1 - resistance); // 150 damage // .6f = 60% // take 40% damage
 
-        entityVfx?.PlayOnDamageVfx(); // mean :entityVfx != null entityVfx.PlayOnDamageVfx();
-        ReduceHp(finalDamage);
+        TakeKnockback(damageDealer, physicalDamageTaken);
+        ReduceHp(physicalDamageTaken + elementalDamageTaken);
 
-        Debug.Log("Elemental Damage Taken" + elementalDamage);
 
         return true;
+    }
+    private void TakeKnockback(Transform damageDealer, float finalDamage)
+    {
+        Vector2 knochback = CalulateKnockback(finalDamage, damageDealer);
+        float durationh = CaculateDuration(finalDamage);
+
+        entity?.ReciveKnockback(knochback, durationh);
     }
 
     private bool AttackEvaded() => Random.Range(0, 100) < stats.GetEvasion();
     protected void ReduceHp(float damage)
     {
+        entityVfx?.PlayOnDamageVfx(); // mean :entityVfx != null entityVfx.PlayOnDamageVfx();
         currentHp -= damage;
         UpdateHealthBar();
 

@@ -24,29 +24,49 @@ public class Entity_Stats : MonoBehaviour
         {
             highestDamage = iceDamage;
             element = ElementType.Ice;
-        }    
+        }
 
         if (lightningDamage > highestDamage)
         {
             highestDamage = lightningDamage;
             element = ElementType.Lightning;
-        }    
+        }
 
         if (highestDamage <= 0)
         {
-            return 0;
             element = ElementType.None;
-        }    
+            return 0;
+        }
 
-        float bonusFire = (fireDamage == highestDamage) ? 0 : fireDamage * .5f; 
+        float bonusFire = (fireDamage == highestDamage) ? 0 : fireDamage * .5f;
         float bonusice = (iceDamage == highestDamage) ? 0 : iceDamage * .5f;
         float bonuslightning = (lightningDamage == highestDamage) ? 0 : lightningDamage * .5f;
 
         float weakerElementalDamage = bonusFire + bonusice + bonuslightning;
-
         float finalDamage = highestDamage + weakerElementalDamage + bonusElementalDamage;
 
         return finalDamage;
+    }
+
+    public float GetElementalResistance(ElementType element) // kháng phép
+    {
+        float baseResistance = 0;
+        float bonusResistance = major.intelligence.GetValue() * .5f;// bonus ElementalResistance from intelligence + 0.5% pre INT
+
+        switch (element)
+        {
+            case ElementType.Fire: baseResistance = defense.fireRes.GetValue(); break;
+            case ElementType.Ice: baseResistance = defense.iceRes.GetValue(); break;
+            case ElementType.Lightning: baseResistance = defense.lightningRes.GetValue(); break;
+
+        }
+
+        float resistance = baseResistance + bonusResistance;
+        float resistanceCap = 75f;
+        float finalResistance = Mathf.Clamp(resistance, 0, resistanceCap) / 100; //convert value into 0 to 1 multiplier
+
+        return finalResistance;
+
     }
 
     public float GetPhysicalDamage(out bool isCrit) // từ biến local giờ có thể truy cập ở ngoài method 
