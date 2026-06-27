@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+
+
 public class Entity_Stats : MonoBehaviour
 {
     public Stat maxHealth;
@@ -7,6 +9,45 @@ public class Entity_Stats : MonoBehaviour
     public Stat_OffenseGroup offense;
     public Stat_DefenseGroup defense;
 
+    public float GetElementalDamage(out ElementType element)
+    {
+        float fireDamage = offense.fireDamage.GetValue();
+        float iceDamage = offense.iceDamage.GetValue();
+        float lightningDamage = offense.lightningDamage.GetValue();
+
+        float bonusElementalDamage = major.intelligence.GetValue() * 1; // bonus ElementalDamage from intelligence + 1 pre INT
+
+        float highestDamage = fireDamage;
+        element = ElementType.Fire;
+
+        if (iceDamage > highestDamage)
+        {
+            highestDamage = iceDamage;
+            element = ElementType.Ice;
+        }    
+
+        if (lightningDamage > highestDamage)
+        {
+            highestDamage = lightningDamage;
+            element = ElementType.Lightning;
+        }    
+
+        if (highestDamage <= 0)
+        {
+            return 0;
+            element = ElementType.None;
+        }    
+
+        float bonusFire = (fireDamage == highestDamage) ? 0 : fireDamage * .5f; 
+        float bonusice = (iceDamage == highestDamage) ? 0 : iceDamage * .5f;
+        float bonuslightning = (lightningDamage == highestDamage) ? 0 : lightningDamage * .5f;
+
+        float weakerElementalDamage = bonusFire + bonusice + bonuslightning;
+
+        float finalDamage = highestDamage + weakerElementalDamage + bonusElementalDamage;
+
+        return finalDamage;
+    }
 
     public float GetPhysicalDamage(out bool isCrit) // từ biến local giờ có thể truy cập ở ngoài method 
     {

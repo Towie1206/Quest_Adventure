@@ -10274,7 +10274,7 @@ MonoBehaviour:
       baseValue: 0
     iceDamage:
       baseValue: 0
-    lightnigDamage:
+    lightningDamage:
       baseValue: 0
   defense:
     armor:
@@ -10942,7 +10942,7 @@ MonoBehaviour:
       baseValue: 0
     iceDamage:
       baseValue: 0
-    lightnigDamage:
+    lightningDamage:
       baseValue: 0
   defense:
     armor:

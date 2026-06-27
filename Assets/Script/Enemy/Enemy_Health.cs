@@ -5,12 +5,12 @@ public class Enemy_Health : Entity_Health
     private Enemy enemy => GetComponent<Enemy>(); // getcomponent mỗi khi sử dụng thay vì chỉ getcomponent 1 lần ở awake
 
 
-    public override bool TakeDamage(float damage,Transform damageDealer)
+    public override bool TakeDamage(float damage, float elementalDamage, Transform damageDealer)
     {
         //!try enter battle state 
         //?if damedealer == player;
         // enemy.player == damageDealer;
-        bool wasHit = base.TakeDamage(damage, transform);
+        bool wasHit = base.TakeDamage(damage, elementalDamage, transform);
 
         if (!wasHit)
             return false;

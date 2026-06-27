@@ -34,7 +34,7 @@ public class Entity_Health : MonoBehaviour, IDamgable
 
 
     //every time somebody takes damage the entity will know who dealt that damage.
-    public virtual bool TakeDamage(float damage, Transform damageDealer)
+    public virtual bool TakeDamage(float damage, float elementalDamage, Transform damageDealer)
     {
         if (isDead)
             return false;
@@ -52,7 +52,7 @@ public class Entity_Health : MonoBehaviour, IDamgable
         entityVfx?.PlayOnDamageVfx(); // mean :entityVfx != null entityVfx.PlayOnDamageVfx();
         ReduceHp(finalDamage);
 
-        Debug.Log("Damage Taken" + finalDamage);
+        Debug.Log("Elemental Damage Taken" + elementalDamage);
 
         return true;
     }
