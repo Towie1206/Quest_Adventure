@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class Entity : MonoBehaviour
 {
@@ -27,6 +29,7 @@ public class Entity : MonoBehaviour
     //Condition variables biến điều kiện
     private bool isKnocked;
     private Coroutine knockbackCo;
+    private Coroutine slowDownCo;
 
     protected virtual void Awake()
     {
@@ -56,6 +59,18 @@ public class Entity : MonoBehaviour
 
     }
 
+    public virtual void SlowDownEntity(float duration, float slowMultiplier)
+    {
+        if(slowDownCo != null)
+            StopCoroutine(slowDownCo);
+
+        slowDownCo = StartCoroutine(SlowDownEntityCo(duration, slowMultiplier));
+    }
+    
+    protected virtual IEnumerator SlowDownEntityCo(float duration, float slowMultiplier)
+    {
+        yield return null; //created on the entity and will have to override it both for player and the enemy
+    }
     public void ReciveKnockback(Vector2 knockback, float knockbackDuration)
     {
         if (knockbackCo != null)

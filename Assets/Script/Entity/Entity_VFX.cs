@@ -17,13 +17,47 @@ public class Entity_VFX : MonoBehaviour
     [SerializeField] private GameObject hitVfx;
     [SerializeField] private GameObject critHitVfx;
 
+    [Header("Element Colors")]
+    [SerializeField] private Color chillVfx = Color.cyan;
+    private Color originalHitVfxColor;
+
     private void Awake()
     {
         entity = GetComponent<Entity>();
         sr = GetComponentInChildren<SpriteRenderer>();
 
         originalMaterial = sr.material;
+        originalHitVfxColor = hitVfxColor;
     }
+
+    public void PlayOnStatusVfx(float duration,ElementType element)
+    {
+        if (element == ElementType.Ice)
+            StartCoroutine(IceStatusVfxCo(duration, chillVfx));
+    }       
+
+    private IEnumerator IceStatusVfxCo(float duration, Color effectColor)
+    {
+        float tickInterval = .25f;
+        float timeHasPassed = 0;
+
+        Color lightColor = effectColor * 1.2f; // make lighter
+        Color darkColor = effectColor * .9f; // make darker
+
+        bool toggle = false;
+
+        while(timeHasPassed < duration)
+        {
+            sr.color = toggle? lightColor : darkColor;
+            toggle = !toggle;
+
+            yield return new WaitForSeconds(tickInterval); //it will go into loop again untill timm >= duration
+            timeHasPassed += tickInterval;
+        }
+
+        sr.color = Color.white; // defaut color
+    }
+
     public void CreateOnHitVFX(Transform target, bool isCrit)
     {
         GameObject hitPrefab = isCrit ? critHitVfx : hitVfx;
@@ -32,6 +66,15 @@ public class Entity_VFX : MonoBehaviour
 
         if (entity.facingDir == -1 && isCrit)
             vfx.transform.Rotate(0, 180, 0);
+    }
+
+    public void UpdateOnHitColor(ElementType element)
+    {
+        if(element == ElementType.Ice)
+            hitVfxColor = chillVfx;
+
+        if (element == ElementType.None)
+            hitVfxColor = originalHitVfxColor;
     }
     public void PlayOnDamageVfx()
     {

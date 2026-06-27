@@ -65,7 +65,7 @@ public class Entity_Stats : MonoBehaviour
         float resistanceCap = 75f;
         float finalResistance = Mathf.Clamp(resistance, 0, resistanceCap) / 100; //convert value into 0 to 1 multiplier
 
-        return finalResistance;
+        return finalResistance; // % kháng sẽ giảm
 
     }
 

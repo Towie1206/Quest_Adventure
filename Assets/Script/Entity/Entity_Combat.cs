@@ -5,12 +5,14 @@ public class Entity_Combat : MonoBehaviour
     private Entity_VFX vfx;
     private Entity_Stats stats;
 
-
     [Header("Target detection")]
     [SerializeField] private Transform targetCheck;
     [SerializeField] private float targetCheckRadius = 1;
     [SerializeField] private LayerMask whatIsTarget;
 
+    [Header("Status Effect details")]
+    [SerializeField] private float defautDuration = 3;
+    [SerializeField] private float chillSlowMultiplier = .2f;
     private void Awake()
     {
         vfx = GetComponent<Entity_VFX>();
@@ -30,13 +32,28 @@ public class Entity_Combat : MonoBehaviour
             float elementalDamage = stats.GetElementalDamage(out ElementType element);
             float damage = stats.GetPhysicalDamage(out bool isCrit);
             // Có 2 chức năng vừa trả về bool vừa thực thi takedamage()
-            bool targetGotHit = damegable.TakeDamage(damage, elementalDamage,element, transform); // transform của người thực hiện đòn đánh 
+            bool targetGotHit = damegable.TakeDamage(damage, elementalDamage, element, transform); // transform của người thực hiện đòn đánh 
+
+            if (element != ElementType.None)
+                AppliedStatsEffect(target.transform, element);
 
             if (targetGotHit)
+            {
+                vfx.UpdateOnHitColor(element);
                 vfx.CreateOnHitVFX(target.transform, isCrit);
+            }
         }
     }
 
+    public void AppliedStatsEffect(Transform target, ElementType element)
+    {
+        Entity_StatusHandler statusHandler = target.GetComponent<Entity_StatusHandler>();
+        if (statusHandler == null)
+            return;
+
+        if (element == ElementType.Ice && statusHandler.CanBeApplied(ElementType.Ice))
+            statusHandler.AppliedChillEffect(defautDuration, chillSlowMultiplier);
+    }
     protected Collider2D[] GetDetectedColliders()
     {
         return Physics2D.OverlapCircleAll(targetCheck.position, targetCheckRadius, whatIsTarget);

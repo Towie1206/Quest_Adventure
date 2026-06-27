@@ -40,6 +40,43 @@ public class Player : Entity
     public float dashSpeed = 20f;
     public Vector2 moveInput { get; private set; }
 
+
+    protected override IEnumerator SlowDownEntityCo(float duration, float slowMultiplier)
+    {
+        float originalMoveSpeed = moveSpeed;
+        float originalJumpForce = jumpForce;
+        float originalAnimSpeed = anim.speed;
+        Vector2 originWallJump = wallJumpForce;
+        Vector2 originJumAttack = jumpAttackVelocity;
+        Vector2[] originAttackVelocity = new Vector2 [attackVelocity.Length];
+        Array.Copy(attackVelocity, originAttackVelocity, attackVelocity.Length);
+
+
+        float speedMultiplier = 1 - slowMultiplier;
+
+        moveSpeed *= speedMultiplier;
+        jumpForce *= speedMultiplier;
+        anim.speed *= speedMultiplier;
+        wallJumpForce *= speedMultiplier;
+        jumpAttackVelocity *= speedMultiplier;
+        
+        for(int i = 0; i <attackVelocity.Length;i++)
+        {
+            originAttackVelocity[i] *= speedMultiplier;
+        }
+
+        yield return new WaitForSeconds(duration);
+
+        moveSpeed = originalMoveSpeed;
+        jumpForce = originalJumpForce;
+        anim.speed = originalAnimSpeed;
+        wallJumpForce = originWallJump;
+        jumpAttackVelocity = originJumAttack;
+        for (int i = 0; i < attackVelocity.Length; i++)
+        {
+            originAttackVelocity[i] = originAttackVelocity[i];
+        }
+    }
     protected override void Awake()
     {
         base.Awake();
