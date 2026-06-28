@@ -26,20 +26,11 @@ public class Player_BasicAttackState : PlayerState
         base.Enter();
         comboAttackQueued = false;
         ResetComboIndexIfNeeded();
+        SyncAttackSpeed();
 
         //đổi hướng khi đang tấn công
         //if (player.moveInput.x != 0 ?) yes -> value = ((int)player.moveInput.x), if (player.moveInput.x != 0 ?) no -> value = player.facingDir
         attackDir = player.moveInput.x != 0 ? ((int)player.moveInput.x) : player.facingDir;
-
-        // if (player.moveInput.x != 0)
-        // {
-        //     attackDir = ((int)player.moveInput.x);
-        // }
-        // else 
-        //  {
-        //      attackDir = player.facingDir;
-        // }
-
 
         anim.SetInteger("basicAttackIndex", comboIndex);
         ApplyAttackVelocity();

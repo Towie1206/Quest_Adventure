@@ -10,6 +10,9 @@ public class Entity : MonoBehaviour
 
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
+    
+    public Entity_Stats stats { get; private set; }
+
     protected StateMachine stateMachine;
 
 
@@ -35,6 +38,7 @@ public class Entity : MonoBehaviour
     {
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        stats = GetComponent<Entity_Stats>();
 
         stateMachine = new StateMachine();
         
@@ -71,20 +75,20 @@ public class Entity : MonoBehaviour
     {
         yield return null; //created on the entity and will have to override it both for player and the enemy
     }
-    public void ReciveKnockback(Vector2 knockback, float knockbackDuration)
+    public void ReciveKnockback(Vector2 knockback, float duration)
     {
         if (knockbackCo != null)
-          StopCoroutine(knockbackCo);
+            StopCoroutine(knockbackCo);
 
-        knockbackCo = StartCoroutine(KnockbackCo(knockback, knockbackDuration));
+        knockbackCo = StartCoroutine(KnockbackCo(knockback, duration));
     }
 
-    private IEnumerator KnockbackCo(Vector2 knockback, float knockbackDuration)
+    private IEnumerator KnockbackCo(Vector2 knockback, float duration)
     {
         isKnocked = true;
         rb.linearVelocity = knockback;
 
-        yield return new WaitForSeconds(knockbackDuration);
+        yield return new WaitForSeconds(duration);
 
         rb.linearVelocity = Vector2.zero; //it's going to just slide all over the level if dont reset
 
