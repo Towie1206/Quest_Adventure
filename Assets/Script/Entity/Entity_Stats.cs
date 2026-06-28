@@ -9,7 +9,7 @@ public class Entity_Stats : MonoBehaviour
     public Stat_OffenseGroup offense;
     public Stat_DefenseGroup defense;
 
-    public float GetElementalDamage(out ElementType element)
+    public float GetElementalDamage(out ElementType element, float scaleFactor = 1) //scaleFactor e.g make a clone and clone only deal X% damage of your
     {
         float fireDamage = offense.fireDamage.GetValue();
         float iceDamage = offense.iceDamage.GetValue();
@@ -45,7 +45,7 @@ public class Entity_Stats : MonoBehaviour
         float weakerElementalDamage = bonusFire + bonusice + bonuslightning;
         float finalDamage = highestDamage + weakerElementalDamage + bonusElementalDamage;
 
-        return finalDamage;
+        return finalDamage * scaleFactor;
     }
 
     public float GetElementalResistance(ElementType element) // kháng phép
@@ -69,7 +69,7 @@ public class Entity_Stats : MonoBehaviour
 
     }
 
-    public float GetPhysicalDamage(out bool isCrit) // từ biến local giờ có thể truy cập ở ngoài method 
+    public float GetPhysicalDamage(out bool isCrit , float scaleFactor = 1) // từ biến local giờ có thể truy cập ở ngoài method 
     {
         float baseDamage = offense.damage.GetValue();
         float bonusDamage = major.strength.GetValue() * 1;
@@ -86,7 +86,7 @@ public class Entity_Stats : MonoBehaviour
         isCrit = Random.Range(0, 100) < totalCritChance;
         float finalDamage = isCrit ? totalBaseDamage * critPower : totalBaseDamage;
 
-        return finalDamage;
+        return finalDamage * scaleFactor;
     }
 
     public float GetArmorMitigation(float armorReduction) // khả năng giảm sát thương của giáp

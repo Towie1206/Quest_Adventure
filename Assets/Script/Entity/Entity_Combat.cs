@@ -45,7 +45,7 @@ public class Entity_Combat : MonoBehaviour
         }
     }
 
-    public void AppliedStatsEffect(Transform target, ElementType element)
+    public void AppliedStatsEffect(Transform target, ElementType element,float scaleFactor = 1)
     {
         Entity_StatusHandler statusHandler = target.GetComponent<Entity_StatusHandler>();
         if (statusHandler == null)
@@ -53,6 +53,13 @@ public class Entity_Combat : MonoBehaviour
 
         if (element == ElementType.Ice && statusHandler.CanBeApplied(ElementType.Ice))
             statusHandler.AppliedChillEffect(defautDuration, chillSlowMultiplier);
+
+        if(element == ElementType.Fire && statusHandler.CanBeApplied(ElementType.Fire))
+        {
+            float fireDamage = stats.offense.fireDamage.GetValue() * scaleFactor;
+
+            statusHandler.AppliedBurnEffect(defautDuration, fireDamage);
+        }
     }
     protected Collider2D[] GetDetectedColliders()
     {
