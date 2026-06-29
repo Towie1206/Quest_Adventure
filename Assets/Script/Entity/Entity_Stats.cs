@@ -4,10 +4,13 @@
 
 public class Entity_Stats : MonoBehaviour
 {
+    public Stat_SetupSO defaultStatSetup;
+
+
     public Stat_ResourceGroup resources;
-    public Stat_MajorGroup major;
     public Stat_OffenseGroup offense;
     public Stat_DefenseGroup defense;
+    public Stat_MajorGroup major;
 
     public float GetElementalDamage(out ElementType element, float scaleFactor = 1) //scaleFactor e.g make a clone and clone only deal X% damage of your
     {
@@ -69,7 +72,7 @@ public class Entity_Stats : MonoBehaviour
 
     }
 
-    public float GetPhysicalDamage(out bool isCrit , float scaleFactor = 1) // từ biến local giờ có thể truy cập ở ngoài method 
+    public float GetPhysicalDamage(out bool isCrit, float scaleFactor = 1) // từ biến local giờ có thể truy cập ở ngoài method 
     {
         float baseDamage = offense.damage.GetValue();
         float bonusDamage = major.strength.GetValue() * 1;
@@ -137,5 +140,76 @@ public class Entity_Stats : MonoBehaviour
         float finalMaxHealth = baseMaxHealth + bonusMaxHealth;
 
         return finalMaxHealth;
+    }
+
+    public Stat GetStatByType(StatType type)
+    {
+        switch (type)
+        {
+            case StatType.MaxHealth: return resources.maxHealth;
+            case StatType.HealthRegen: return resources.healthRegen;
+
+            case StatType.Strength: return major.strength;
+            case StatType.Agility: return major.agility;
+            case StatType.Intelligence: return major.intelligence;
+            case StatType.Vitality: return major.vitality;
+
+            case StatType.AttackSpeed: return offense.attackSpeed;
+            case StatType.Damage: return offense.damage;
+            case StatType.CritChance: return offense.critChance;
+            case StatType.CritPower: return offense.critPower;
+            case StatType.ArmorReduction: return offense.armorReduction;
+
+            case StatType.FireDamage: return offense.fireDamage;
+            case StatType.IceDamage: return offense.iceDamage;
+            case StatType.LightningDamage: return offense.lightningDamage;
+
+            case StatType.Armor: return defense.armor;
+            case StatType.Evasion: return defense.evasion;
+
+            case StatType.FireResistance: return defense.fireRes;
+            case StatType.IceResistance: return defense.iceRes;
+            case StatType.LightningResistance: return defense.lightningRes;
+
+            default:
+                return null;
+        }
+    }
+
+    [ContextMenu("Update Default Stat Setup")]
+    public void ApplyDefaultStatSetup()
+    {
+        if(defaultStatSetup == null) 
+        {
+            Debug.Log("No defauls stat setup assigned");
+            return;
+        }
+
+        resources.maxHealth.SetBaseValue(defaultStatSetup.maxHealth);
+        resources.healthRegen.SetBaseValue(defaultStatSetup.healthRegen);
+
+        major.strength.SetBaseValue(defaultStatSetup.strength);
+        major.agility.SetBaseValue(defaultStatSetup.agility);
+        major.intelligence.SetBaseValue(defaultStatSetup.intelligence);
+        major.vitality.SetBaseValue(defaultStatSetup.vitality);
+
+        offense.attackSpeed.SetBaseValue(defaultStatSetup.attackSpeed);
+        offense.damage.SetBaseValue(defaultStatSetup.damage);
+        offense.critChance.SetBaseValue(defaultStatSetup.critChance);
+        offense.critPower.SetBaseValue(defaultStatSetup.critPower);
+        offense.armorReduction.SetBaseValue(defaultStatSetup.armorReduction);
+
+        offense.iceDamage.SetBaseValue(defaultStatSetup.iceDamage);
+        offense.fireDamage.SetBaseValue(defaultStatSetup.fireDamage);
+        offense.lightningDamage.SetBaseValue(defaultStatSetup.lightningDamage);
+
+        defense.armor.SetBaseValue(defaultStatSetup.armor);
+        defense.evasion.SetBaseValue(defaultStatSetup.evasion);
+
+        defense.iceRes.SetBaseValue(defaultStatSetup.iceResistance);
+        defense.fireRes.SetBaseValue(defaultStatSetup.fireResistance);
+        defense.lightningRes.SetBaseValue(defaultStatSetup.lightningResistance);
+
+
     }
 }
