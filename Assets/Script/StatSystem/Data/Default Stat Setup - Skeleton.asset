@@ -17,7 +17,7 @@ MonoBehaviour:
   attackSpeed: 1
   damage: 10
   critChance: 0
-  critPower: 0
+  critPower: 150
   armorReduction: 0
   fireDamage: 0
   iceDamage: 0
@@ -27,3 +27,7 @@ MonoBehaviour:
   fireResistance: 0
   iceResistance: 0
   lightningResistance: 0
+  strength: 0
+  agility: 0
+  intelligence: 0
+  vitality: 0
