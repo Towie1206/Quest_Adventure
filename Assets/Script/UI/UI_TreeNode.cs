@@ -6,15 +6,21 @@ public class UI_TreeNode : MonoBehaviour , IPointerEnterHandler, IPointerExitHan
 {
     private UI ui;
     private RectTransform rect;
+    private UI_SkillTree skillTree;
 
-    [SerializeField] private Skill_DataSO skillData;
-    [SerializeField] private string skillName;
-
-    [SerializeField] private Image skillIcon;
-    [SerializeField] private string lockColorHex = "#9F9797";
-    private Color lastColor;
+    [Header("Unlock Details")]
+    public UI_TreeNode[] neededNodes;
+    public UI_TreeNode[] conflictNodes;
     public bool isUnlocked;
     public bool isLocked;
+
+    [Header("Skill Details")]
+    public Skill_DataSO skillData;
+    [SerializeField] private string skillName;
+    [SerializeField] private Image skillIcon;
+    [SerializeField] private int skillCost;
+    [SerializeField] private string lockColorHex = "#9F9797";
+    private Color lastColor;
 
 
     private void Awake()
@@ -23,13 +29,17 @@ public class UI_TreeNode : MonoBehaviour , IPointerEnterHandler, IPointerExitHan
 
         rect = GetComponent<RectTransform>();
 
+        skillTree = GetComponentInParent<UI_SkillTree>();
+
         UpdateItemColor(GetColorByHex(lockColorHex));
     }
 
     private void Unlock()
     {
         isUnlocked = true;
+        skillTree.RemoveSkillPoints(skillData.cost);
         UpdateItemColor(Color.white);
+        LockConflictNodes();
     }
 
     private bool CanBeUnlock()
@@ -37,7 +47,31 @@ public class UI_TreeNode : MonoBehaviour , IPointerEnterHandler, IPointerExitHan
         if (isLocked || isUnlocked)
             return false;
 
+        if(!skillTree.EnoughSkillPoints(skillData.cost))
+            return false;
+
+        foreach (var node in neededNodes) // nếu bất kì node nào trong neededNodes chưa được mở khóa thì không thể mở khóa node hiện tại
+        {
+            if(!node.isUnlocked)
+                return false;
+        }
+
+        foreach(var node in conflictNodes) // nếu bất kì node nào trong conflictNodes đã được mở khóa thì không thể mở khóa node hiện tại
+        {
+            if(node.isUnlocked)
+                return false;
+        }
+
         return true;
+    }
+
+    private void LockConflictNodes()
+    {
+        foreach(var node in conflictNodes)
+        {
+            node.isLocked = true;
+            node.UpdateItemColor(GetColorByHex(lockColorHex));
+        }
     }
 
     private void UpdateItemColor(Color color)
@@ -57,7 +91,7 @@ public class UI_TreeNode : MonoBehaviour , IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerEnter(PointerEventData eventData) // khi di con trỏ chuột vào
     {
-        ui.skillToolTip.ShowToolTip(true, rect , skillData);
+        ui.skillToolTip.ShowToolTip(true, rect , this);
 
         if (!isUnlocked)
             UpdateItemColor(Color.white * .9f);
@@ -84,6 +118,7 @@ public class UI_TreeNode : MonoBehaviour , IPointerEnterHandler, IPointerExitHan
 
         skillName = skillData.displayName;
         skillIcon.sprite = skillData.icon;
+        skillCost = skillData.cost;
         gameObject.name ="UI_TreeNode" + skillData.displayName;
     }
 }
