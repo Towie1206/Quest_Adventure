@@ -1,16 +1,13 @@
 using UnityEngine;
 
-public class Skill_DataSO : MonoBehaviour
+[CreateAssetMenu(menuName = "RPG Setup/Skill Data", fileName = "Skil data - ")]
+public class Skill_DataSO : ScriptableObject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public int cost;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Skill description")]
+    public string displayName;
+    [TextArea]
+    public string description;
+    public Sprite icon;
 }
