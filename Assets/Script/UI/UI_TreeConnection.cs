@@ -1,21 +1,23 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_TreeConnection : MonoBehaviour
 {
-    [SerializeField] private RectTransform rotationPoint;
-    [SerializeField] private RectTransform connectionLength;
-    [SerializeField] private RectTransform childNodeConnectionPoint;
+    [SerializeField] private RectTransform rotationPoint; // điểm xoay của dây nối canva enmty
+    [SerializeField] private RectTransform connectionLength; // chiều dài của dây nối canva image
+    [SerializeField] private RectTransform childNodeConnectionPoint; // điểm kết nối của node con
 
-
-    public void DirectConnection(NodeDirectionType direction, float length)
+    public void DirectConnection(NodeDirectionType direction, float length, float offset)
     {
-        bool shouldBeActice = direction != NodeDirectionType.None;
-        float finalLength = shouldBeActice ? length : 0;
+        bool shouldBeActice = direction != NodeDirectionType.None; // có hướng thì có thể active
+        float finalLength = shouldBeActice ? length : 0; // trên true thì có chiều dài, false thì 0
         float angle = GetDirectionAngle(direction);
 
-        rotationPoint.localRotation = Quaternion.Euler(0,0,angle);
+        rotationPoint.localRotation = Quaternion.Euler(0,0,angle + offset); // offset là xoay thêm phải là xoay Z not Y
         connectionLength.sizeDelta = new Vector2(finalLength, connectionLength.sizeDelta.y);
     }
+
+    public Image GetConnectionImage() => connectionLength.GetComponent<Image>();
 
     public Vector2 GetConnectionPoint(RectTransform rect)
     {
