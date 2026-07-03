@@ -1,0 +1,38 @@
+﻿using UnityEngine;
+
+public class Skill_Base : MonoBehaviour
+{
+    [Header("General Details")]
+    [SerializeField] protected SkillType skillType;
+    [SerializeField] protected SkillUpgradeType upgradeType;
+
+    [SerializeField] private float cooldown;
+    private float lastTimeUsed;
+
+    protected virtual void Awake()
+    {
+        lastTimeUsed = lastTimeUsed - cooldown;
+    }
+
+    public void SetSkillUpgrade(SkillUpgradeType upgarde)
+    {
+        upgradeType = upgarde;
+    }
+
+    public bool CanUseSkill()
+    {
+        if(OnCoolDown())
+        {
+
+            return false;
+        }
+
+        return true;
+    }    
+
+    private bool OnCoolDown() => Time.time < lastTimeUsed + cooldown; // use skill in 15s in the game and cooldown is 5 so when time in game is 20s it true
+    public void SetSkillOnCooldown () => lastTimeUsed = Time.time; // lưu time in game
+    public void ResetCooldownBy(float cooldownReduction) => lastTimeUsed += cooldownReduction;
+    public void ResetCooldown() => lastTimeUsed = Time.time;
+}
+

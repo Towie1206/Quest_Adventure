@@ -54,8 +54,11 @@ public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         isUnlocked = true;
         UpdateIconColor(Color.white);
         LockConflictNodes();
+
         skillTree.RemoveSkillPoints(skillData.cost);
         connectHandler.UnlockedConnectionImage(true);
+
+        skillTree.skillManager.GetSkillByType(skillData.skilltype).SetSkillUpgrade(skillData.upgradeType);
     }
 
     private bool CanBeUnlock()
@@ -111,16 +114,20 @@ public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         ui.skillToolTip.ShowToolTip(true, rect, this);
 
-        if (!isUnlocked || !isLocked)
-            ToggleNodeHighlight(true);
+        if (isUnlocked || isLocked)
+            return;
+
+        ToggleNodeHighlight(true);
     }
 
     public void OnPointerExit(PointerEventData eventData) // khi bỏ con trỏ chuột ra 
     {
         ui.skillToolTip.ShowToolTip(false, rect);
 
-        if (!isUnlocked || !isLocked)
-            ToggleNodeHighlight(false);
+        if (isUnlocked || isLocked)
+            return;
+
+        ToggleNodeHighlight(false);
 
     }
 
@@ -156,6 +163,6 @@ public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         skillName = skillData.displayName;
         skillIcon.sprite = skillData.icon;
         skillCost = skillData.cost;
-        gameObject.name = "UI_TreeNode" + skillData.displayName;
+        gameObject.name = "UI_TreeNode - " + skillData.displayName;
     }
 }
