@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Security.Cryptography;
+using UnityEngine;
 
 public class Skill_Base : MonoBehaviour
 {
@@ -6,12 +7,17 @@ public class Skill_Base : MonoBehaviour
     [SerializeField] protected SkillType skillType;
     [SerializeField] protected SkillUpgradeType upgradeType;
 
-    [SerializeField] private float cooldown;
+    [SerializeField] protected float cooldown;
     private float lastTimeUsed;
 
     protected virtual void Awake()
     {
         lastTimeUsed = lastTimeUsed - cooldown;
+    }
+
+    public virtual void TryUseSkill()
+    {
+
     }
 
     public void SetSkillUpgrade(UpgradeData upgrade)

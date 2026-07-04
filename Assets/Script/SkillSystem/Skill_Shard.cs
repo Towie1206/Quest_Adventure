@@ -1,19 +1,84 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Skill_Shard : Skill_Base
 {
+    private SkillObject_Shard currentShard;
+
     [SerializeField] private GameObject shardPrefab;
     [SerializeField] private float detonateTime = 2f; // thoi gian kích nổ
 
+    [Header("Moving Shard Upgrade")]
+    [SerializeField] private float shardSpeed = 7f;
 
+    [Header("Multicast Shard Upgrade")]
+    [SerializeField] private int maxCharges = 3;
+    [SerializeField] private int currentCharges;
+    [SerializeField] private bool isReCharging;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        currentCharges = maxCharges;
+    }
+    public override void TryUseSkill()
+    {
+        if (!CanUseSkill())
+            return;
+
+        if (Unlocked(SkillUpgradeType.Shard))
+            HandleShardRegular();
+
+        if (Unlocked(SkillUpgradeType.Shard_MoveToEnemy))
+            HandleShardMoving();
+
+        if (Unlocked(SkillUpgradeType.Shard_MultiCast))
+            HandleShardMulticast();
+    }
+
+    private void HandleShardMulticast()
+    {
+        if (currentCharges <= 0)
+            return;
+
+        CreateShard();
+        currentShard.MoveTowardsClosestTarget(shardSpeed); // ko su dung HandleShardMoving() vi co cooldown
+        currentCharges--;
+
+        if(isReCharging == false)
+            StartCoroutine(ShardRechargeCo());
+    }
+
+    private IEnumerator ShardRechargeCo()
+    {
+        isReCharging = true;
+
+        while(currentCharges < maxCharges)
+        {
+            yield return new WaitForSeconds(cooldown);
+            currentCharges++;
+        }
+
+        isReCharging = false;
+    }
+
+    private void HandleShardMoving()
+    {
+        CreateShard();
+        currentShard.MoveTowardsClosestTarget(shardSpeed);
+        SetSkillOnCooldown();
+    }
+
+    private void HandleShardRegular()
+    {
+        CreateShard();
+        SetSkillOnCooldown();
+    }
 
     public void CreateShard()
     {
-
-        if (upgradeType == SkillUpgradeType.None)
-            return;
-
-        GameObject shard = Instantiate(shardPrefab,transform.position,Quaternion.identity);
-        shard.GetComponent<SkillObject_Shard>().SetUpShard(detonateTime);
+        GameObject shard = Instantiate(shardPrefab, transform.position, Quaternion.identity);
+        currentShard = shard.GetComponent<SkillObject_Shard>();
+        currentShard.SetUpShard(detonateTime);
     }
 }
