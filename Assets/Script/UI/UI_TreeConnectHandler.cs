@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,15 +27,19 @@ public class UI_TreeConnectHandler : MonoBehaviour
             originalColor = connectionImage.color;
     }
 
-    private void OnValidate()
+    public UI_TreeNode[] GetChildNode()
     {
-        if (connections.Length <= 0)
-            return;
+        List<UI_TreeNode> childrenToReturn = new List<UI_TreeNode>();
 
-        if (connectionDetails.Length != connections.Length)
-            return;
+        foreach(var node in connectionDetails)
+        {
+            if(node.chillNode != null)
+            {
+                childrenToReturn.Add(node.chillNode.GetComponent<UI_TreeNode>());
+            }
+        }
 
-        UpdateConnections();
+        return childrenToReturn.ToArray();
     }
 
     public void UpdateConnections() // update vị trí, xoay, dài, image của connection, xếp vị trí 
@@ -82,4 +87,15 @@ public class UI_TreeConnectHandler : MonoBehaviour
 
     // set vị trí của node hiện tại dựa trên vị trí của connectionPoint của connection
     public void SetPosition(Vector2 position) => rect.anchoredPosition = position; 
+
+    private void OnValidate()
+    {
+        if (connections.Length <= 0)
+            return;
+
+        if (connectionDetails.Length != connections.Length)
+            return;
+
+        UpdateConnections();
+    }
 }

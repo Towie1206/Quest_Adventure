@@ -1,22 +1,31 @@
 fileFormatVersion: 2
-guid: a55fc4072dfc2a248801ff05ab5fc152
+guid: 7625c5ff9eaa23a4ea3a7988f9c216e7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 292091708780554302
-    second: SP103_02_0
+      213: 1102079177054390825
+    second: Effect 1 - Sprite Sheet_0
   - first:
-      213: -66904145068435480
-    second: SP103_02_1
+      213: 5305133420586813660
+    second: Effect 1 - Sprite Sheet_1
   - first:
-      213: -5352999256995655818
-    second: SP103_02_2
+      213: 8968323078544666857
+    second: Effect 1 - Sprite Sheet_2
   - first:
-      213: -2222656834989453427
-    second: SP103_02_3
+      213: -7452963896434346594
+    second: Effect 1 - Sprite Sheet_3
   - first:
-      213: -1783990950886384079
-    second: SP103_02_4
+      213: -1875148678188374133
+    second: Effect 1 - Sprite Sheet_4
+  - first:
+      213: 5277935113036910604
+    second: Effect 1 - Sprite Sheet_5
+  - first:
+      213: -2525109361797861991
+    second: Effect 1 - Sprite Sheet_6
+  - first:
+      213: 2142041343732998541
+    second: Effect 1 - Sprite Sheet_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,7 +67,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -108,115 +117,106 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SP103_02_0
+      name: Effect 1 - Sprite Sheet_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 18
-        width: 11
-        height: 9
+        x: 0
+        y: 128
+        width: 64
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e38a3bf8cd7bd0400800000000000000
-      internalID: 292091708780554302
+      spriteID: 92a8ea62c2f5b4f00800000000000000
+      internalID: 1102079177054390825
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SP103_02_1
+      name: Effect 1 - Sprite Sheet_1
       rect:
         serializedVersion: 2
-        x: 4
-        y: 7
-        width: 10
-        height: 13
+        x: 0
+        y: 96
+        width: 64
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8e7d137d80f421ff0800000000000000
-      internalID: -66904145068435480
+      spriteID: cd8412cfcbe9f9940800000000000000
+      internalID: 5305133420586813660
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SP103_02_2
+      name: Effect 1 - Sprite Sheet_2
       rect:
         serializedVersion: 2
-        x: 15
-        y: 18
-        width: 10
-        height: 10
+        x: 0
+        y: 64
+        width: 64
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 67f08d3898356b5b0800000000000000
-      internalID: -5352999256995655818
+      spriteID: 9e0b79fd252e57c70800000000000000
+      internalID: 8968323078544666857
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SP103_02_3
+      name: Effect 1 - Sprite Sheet_3
       rect:
         serializedVersion: 2
-        x: 20
-        y: 13
-        width: 10
-        height: 6
+        x: 0
+        y: 32
+        width: 64
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d8f0cdc72698721e0800000000000000
-      internalID: -2222656834989453427
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SP103_02_4
-      rect:
-        serializedVersion: 2
-        x: 14
-        y: 3
-        width: 10
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 13ed7e1aeadfd37e0800000000000000
-      internalID: -1783990950886384079
+      spriteID: e95383dd2d0c19890800000000000000
+      internalID: -7452963896434346594
       vertices: []
       indices: 
       edges: []
@@ -225,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: bf5a974aebd6bda4a8e9c150cce75a0e
     internalID: 0
     vertices: []
     indices: 
@@ -233,13 +233,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      SP103_02_0: 292091708780554302
-      SP103_02_1: -66904145068435480
-      SP103_02_2: -5352999256995655818
-      SP103_02_3: -2222656834989453427
-      SP103_02_4: -1783990950886384079
+      Effect 1 - Sprite Sheet_0: 1102079177054390825
+      Effect 1 - Sprite Sheet_1: 5305133420586813660
+      Effect 1 - Sprite Sheet_2: 8968323078544666857
+      Effect 1 - Sprite Sheet_3: -7452963896434346594
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
