@@ -10,17 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8cfcc22a1e7cd8b4180bd887fe70d968, type: 3}
-  m_Name: Skil data - Time Shard
+  m_Name: Skil data - Phantom Recall
   m_EditorClassIdentifier: Assembly-CSharp::Skill_DataSO
   cost: 0
-  unlockedByDefault: 1
-  skilltype: 2
+  unlockedByDefault: 0
+  skilltype: 0
   upgradeData:
-    upgradeType: 6
-    coolDown: 1
-  displayName: Time Shard
-  description: 'Create a Time Shard filled with elemental magic.
-
-    The Shard explodes
-    when touched by an enemy or when time goes up.'
-  icon: {fileID: -1794592880, guid: 7252c201e2b98424b93847e837014304, type: 3}
+    upgradeType: 0
+    coolDown: 0
+  displayName: 
+  description: 
+  icon: {fileID: 0}

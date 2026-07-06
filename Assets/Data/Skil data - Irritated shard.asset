@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cfcc22a1e7cd8b4180bd887fe70d968, type: 3}
   m_Name: Skil data - Irritated shard
   m_EditorClassIdentifier: Assembly-CSharp::Skill_DataSO
-  cost: 0
+  cost: 2
   unlockedByDefault: 0
-  skilltype: 0
+  skilltype: 2
   upgradeData:
-    upgradeType: 0
-    coolDown: 0
-  displayName: 
-  description: 
-  icon: {fileID: 0}
+    upgradeType: 7
+    coolDown: 4
+  displayName: Irritated shard
+  description: Shard wiil be fly towards closest enemy
+  icon: {fileID: 1330996429, guid: 7252c201e2b98424b93847e837014304, type: 3}

@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Skil data - Quick Dash
   m_EditorClassIdentifier: Assembly-CSharp::Skill_DataSO
   cost: 0
+  unlockedByDefault: 1
   skilltype: 0
   upgradeData:
-    upgradeType: 0
+    upgradeType: 1
     coolDown: 3
   displayName: Quick Dash
   description: 'Dash to avoid attacks.

@@ -1,5 +1,4 @@
-﻿using System.Xml.Serialization;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Entity_Health : MonoBehaviour, IDamgable
@@ -99,6 +98,14 @@ public class Entity_Health : MonoBehaviour, IDamgable
     {
         isDead = true;
         entity.EntityDead();
+    }
+
+    public float GetHealthPercent() => currentHealth / entityStats.GetMaxHealth();
+
+    public void SetHealthToPercent(float percent)
+    {
+        currentHealth = entityStats.GetMaxHealth() * Mathf.Clamp(percent, 0, 1);
+        UpdateHealthBar();
     }
     private void UpdateHealthBar()
     {

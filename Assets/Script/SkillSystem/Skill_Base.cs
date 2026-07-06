@@ -1,8 +1,9 @@
-﻿using System.Security.Cryptography;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Skill_Base : MonoBehaviour
 {
+    public Player player { get; private set; }
+
     [Header("General Details")]
     [SerializeField] protected SkillType skillType;
     [SerializeField] protected SkillUpgradeType upgradeType;
@@ -12,6 +13,7 @@ public class Skill_Base : MonoBehaviour
 
     protected virtual void Awake()
     {
+        player = GetComponentInParent<Player>();
         lastTimeUsed = lastTimeUsed - cooldown;
     }
 
@@ -42,7 +44,7 @@ public class Skill_Base : MonoBehaviour
 
     protected bool Unlocked(SkillUpgradeType upgradeToCheck) => upgradeType == upgradeToCheck;
 
-    private bool OnCoolDown() => Time.time < lastTimeUsed + cooldown; // use skill in 15s in the game and cooldown is 5 so when time in game is 20s it true
+    protected bool OnCoolDown() => Time.time < lastTimeUsed + cooldown; // use skill in 15s in the game and cooldown is 5 so when time in game is 20s it true
     public void SetSkillOnCooldown () => lastTimeUsed = Time.time; // lưu time in game
     public void ResetCooldownBy(float cooldownReduction) => lastTimeUsed += cooldownReduction;
     public void ResetCooldown() => lastTimeUsed = Time.time;

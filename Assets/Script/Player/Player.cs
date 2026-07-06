@@ -55,7 +55,7 @@ public class Player : Entity
         float originalAnimSpeed = anim.speed;
         Vector2 originWallJump = wallJumpForce;
         Vector2 originJumAttack = jumpAttackVelocity;
-        Vector2[] originAttackVelocity = new Vector2 [attackVelocity.Length];
+        Vector2[] originAttackVelocity = new Vector2[attackVelocity.Length];
         Array.Copy(attackVelocity, originAttackVelocity, attackVelocity.Length);
 
 
@@ -66,8 +66,8 @@ public class Player : Entity
         anim.speed *= speedMultiplier;
         wallJumpForce *= speedMultiplier;
         jumpAttackVelocity *= speedMultiplier;
-        
-        for(int i = 0; i <attackVelocity.Length;i++)
+
+        for (int i = 0; i < attackVelocity.Length; i++)
         {
             originAttackVelocity[i] *= speedMultiplier;
         }
@@ -111,6 +111,9 @@ public class Player : Entity
         base.Start();
         stateMachine.Initialize(idleState);
     }
+
+    public void TeleportPlayer(Vector3 position) => transform.position = position;
+
     public override void EntityDead()
     {
         base.EntityDead();
@@ -118,7 +121,7 @@ public class Player : Entity
         OnPlayerDead?.Invoke();
         stateMachine.ChangeState(deadState);
     }
- 
+
     public void EnterAttackStateWithDelay()
     {
         if (queueAttackCo != null)
