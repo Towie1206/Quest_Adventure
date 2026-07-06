@@ -18,6 +18,16 @@ MonoBehaviour:
   upgradeData:
     upgradeType: 6
     coolDown: 1
+    damageScaleDate:
+      physical: 1
+      elemental: 1
+      chillDuration: 3
+      chillSlowMultiplier: 0.2
+      burnDuration: 3
+      burnDamageScale: 1
+      shockDuration: 3
+      shockDamageScale: 1
+      shockCharge: 0.4
   displayName: Time Shard
   description: 'Create a Time Shard filled with elemental magic.
 

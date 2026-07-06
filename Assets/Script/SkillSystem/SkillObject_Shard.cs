@@ -4,6 +4,7 @@ using UnityEngine;
 public class SkillObject_Shard : SkillObject_Base
 {
     public event Action OnExplode;
+    private Skill_Shard shardManger;
 
     [SerializeField] private GameObject vfxPrefab;
 
@@ -24,8 +25,15 @@ public class SkillObject_Shard : SkillObject_Base
         this.speed = speed;
     }
 
-    public void SetUpShard(float detinationTime) //thời gian đến đích
+    public void SetUpShard(Skill_Shard shardManager) //thời gian đến đích
     {
+        this.shardManger = shardManager;
+
+        playerStats = shardManager.player.stats;
+        damageScaleData = shardManger.damageScaleData;
+
+        float detinationTime = shardManger.GetDetonateTime();
+
         Invoke(nameof(Explode), detinationTime);//thực thi (method) sau một time xác định
     }
 

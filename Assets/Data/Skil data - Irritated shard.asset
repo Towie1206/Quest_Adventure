@@ -18,6 +18,16 @@ MonoBehaviour:
   upgradeData:
     upgradeType: 7
     coolDown: 4
+    damageScaleDate:
+      physical: 1
+      elemental: 1
+      chillDuration: 3
+      chillSlowMultiplier: 0.2
+      burnDuration: 3
+      burnDamageScale: 1
+      shockDuration: 3
+      shockDamageScale: 1
+      shockCharge: 0.4
   displayName: Irritated shard
   description: Shard wiil be fly towards closest enemy
   icon: {fileID: 1330996429, guid: 7252c201e2b98424b93847e837014304, type: 3}

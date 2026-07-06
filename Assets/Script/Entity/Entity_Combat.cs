@@ -5,6 +5,8 @@ public class Entity_Combat : MonoBehaviour
     private Entity_VFX vfx;
     private Entity_Stats stats;
 
+    public DamageScaleData basicAttackScale;
+
     [Header("Target detection")]
     [SerializeField] private Transform targetCheck;
     [SerializeField] private float targetCheckRadius = 1;
@@ -33,13 +35,15 @@ public class Entity_Combat : MonoBehaviour
             if (damegable == null)
                 continue; // skip target, go to next target
 
+            ElementalEffectData effectData = new ElementalEffectData(stats, basicAttackScale);
+
             float elementalDamage = stats.GetElementalDamage(out ElementType element);
             float damage = stats.GetPhysicalDamage(out bool isCrit);
             // Có 2 chức năng vừa trả về bool vừa thực thi takedamage()
             bool targetGotHit = damegable.TakeDamage(damage, elementalDamage, element, transform); // transform của người thực hiện đòn đánh 
 
             if (element != ElementType.None)
-                ApplyStatsEffect(target.transform, element);
+                target.GetComponent<Entity_StatusHandler>().ApplyStatusEffect(element, effectData);
 
             if (targetGotHit)
             {
@@ -49,31 +53,6 @@ public class Entity_Combat : MonoBehaviour
         }
     }
 
-    public void ApplyStatsEffect(Transform target, ElementType element,float scaleFactor = 1)
-    {
-        Entity_StatusHandler statusHandler = target.GetComponent<Entity_StatusHandler>();
-        if (statusHandler == null)
-            return;
-
-
-
-        if (element == ElementType.Ice && statusHandler.CanBeApplied(ElementType.Ice))
-            statusHandler.ApplyChillEffect(defautDuration, chillSlowMultiplier);
-
-        if(element == ElementType.Fire && statusHandler.CanBeApplied(ElementType.Fire))
-        {
-            scaleFactor = fireScale;
-            float fireDamage = stats.offense.fireDamage.GetValue() * scaleFactor;
-
-            statusHandler.ApplyChillEffect(defautDuration, fireDamage);
-        }
-        if(element == ElementType.Lightning && statusHandler.CanBeApplied(ElementType.Lightning))
-        {
-            scaleFactor = lightingScale;
-            float lightningDamage = stats.offense.lightningDamage.GetValue() * scaleFactor;
-            statusHandler.ApplyElectrifyEffect(defautDuration, lightningDamage, electrifyChargeBuildUp);
-        }
-    }
     protected Collider2D[] GetDetectedColliders()
     {
         return Physics2D.OverlapCircleAll(targetCheck.position, targetCheckRadius, whatIsTarget);

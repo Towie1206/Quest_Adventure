@@ -12,12 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cfcc22a1e7cd8b4180bd887fe70d968, type: 3}
   m_Name: Skil data - Phantom Recall
   m_EditorClassIdentifier: Assembly-CSharp::Skill_DataSO
-  cost: 0
+  cost: 2
   unlockedByDefault: 0
-  skilltype: 0
+  skilltype: 2
   upgradeData:
-    upgradeType: 0
-    coolDown: 0
-  displayName: 
-  description: 
-  icon: {fileID: 0}
+    upgradeType: 9
+    coolDown: 3
+    damageScaleDate:
+      physical: 1
+      elemental: 1
+      chillDuration: 3
+      chillSlowMultiplier: 0.2
+      burnDuration: 3
+      burnDamageScale: 1
+      shockDuration: 3
+      shockDamageScale: 1
+      shockCharge: 0.4
+  displayName: Phantom Recall
+  description: Press skill button again, to change places with shard you created.
+  icon: {fileID: -1502558193, guid: 7252c201e2b98424b93847e837014304, type: 3}
