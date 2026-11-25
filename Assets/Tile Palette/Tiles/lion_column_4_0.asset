@@ -11,8 +11,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: lion_column_4_0
-  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.Tilemaps.Tile
-  m_Sprite: {fileID: 2049638566942428302, guid: 4c18afca814ddbd4fb6269f120b83e66, type: 3}
+  m_EditorClassIdentifier: 
+  m_Sprite: {fileID: 2049638566942428302, guid: 1f9b197fda7afa24c90169a0a8339ec8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

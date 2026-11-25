@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d1cc86941ec4350429a08ca22026c07a
+guid: 0ab4fdc3beceac84e9ea5ef1d74582cf
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -136,19 +136,6 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -459,7 +446,7 @@ TextureImporter:
         height: 172
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 17, y: 18, z: 18, w: 18}
       customData: 
       outline: []
       physicsShape: []
@@ -497,7 +484,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 77a19e4488080f84fb315cc7807e5850
+    spriteID: 1d5c0b741753e444f816391b8bc5ff12
     internalID: 0
     vertices: []
     indices: 
@@ -505,9 +492,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
       artdecoUI_PIPO_tr_0: 5717465431152502704
       artdecoUI_PIPO_tr_1: -8483078968825879121

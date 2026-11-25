@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 308ede3232439c44f9e4f40a68cf97f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 1845c76d127fee64f8f29b9b7203195b, type: 3}
   m_Name: Default Stat Setup - Player
-  m_EditorClassIdentifier: Assembly-CSharp::Stat_SetupSO
+  m_EditorClassIdentifier: 
   maxHealth: 100
   healthRegen: 0
   attackSpeed: 1

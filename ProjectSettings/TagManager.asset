@@ -14,11 +14,11 @@ TagManager:
   - Ground
   - Player
   - Enemy
-  - BuffArea
-  - 
-  - 
-  - 
-  - 
+  - PlayerInteractable
+  - SkillObjectSword
+  - EnemyProjectile
+  - Untargetable
+  - NotInteractable
   - 
   - 
   - 
@@ -39,19 +39,19 @@ TagManager:
   - 
   m_SortingLayers:
   - name: Background
-    uniqueID: 896151575
+    uniqueID: 596823231
     locked: 0
   - name: Ground
-    uniqueID: 2455262103
+    uniqueID: 1379488757
     locked: 0
   - name: Chest
-    uniqueID: 928698623
+    uniqueID: 551191945
     locked: 0
   - name: Enemy
-    uniqueID: 827838511
+    uniqueID: 3500169307
     locked: 0
   - name: Player
-    uniqueID: 4051876395
+    uniqueID: 1831899741
     locked: 0
   - name: Default
     uniqueID: 0
